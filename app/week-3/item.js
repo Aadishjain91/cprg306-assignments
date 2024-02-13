@@ -1,11 +1,10 @@
-import React from 'react';
-
-const Item = ({ name, quantity, category }) => {
-  return (
-    <li className="bg-blue-100 p-2 mb-2 rounded-md w-25">
-      {name} - Quantity: {quantity} - Category: {category}
-    </li>
+export default function Item({name, quantity, category}) {
+  return(
+      <main>
+          <div className="custom-item mx-4 my-4 p-3 bg-custom">
+          <h2 className="custom-heading text-lg font-italic text-custom-heading-color">{name}</h2>
+          <p className="text-sm">Buy {quantity} in {category}  </p>
+          </div>
+      </main>
   );
-};
-
-export default Item;
+  }

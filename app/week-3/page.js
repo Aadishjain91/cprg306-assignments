@@ -1,13 +1,9 @@
-import ItemList from "./item-list"
-
-const Page = () => {
+import ItemList from './item-list.js';
+export default function Page() {
     return (
-        <main className="bg-green-950">
-            <h1 className="text-4xl font-bold text-green-200 p-4">Shopping List</h1>
+        <main className="custom-item mx-4 my-4 p-3 bg-custom">
+            <h1 className="text-4xl font-italic m-2">Shopping List</h1>
             <ItemList />
         </main>
-    );
-};
-
-export default Page;
-
+    )
+}
