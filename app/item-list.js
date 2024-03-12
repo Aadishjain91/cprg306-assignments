@@ -1,61 +1,42 @@
 import React, { useState } from 'react';
+import { useClient } from 'next/clients'; // Import useClient from Next.js
 import Item from './item';
-import items from './item.json';
-import './styles.css';
 
-function ItemList() {
+function ItemList({ items }) {
+    useClient(); // Mark ItemList as a Client Component
 
     const [sortBy, setSortBy] = useState('name');
 
-
-
-    const sortedItems = [...items];
-    if (sortBy === 'name') {
-        sortedItems.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === 'category') {
-        sortedItems.sort((a, b) => a.category.localeCompare(b.category));
-    }
-
-
-
-    const isSortByName = sortBy === 'name';
-    const isSortByCategory = sortBy === 'category';
-
-    const handleSortByName = () => {
-        setSortBy('name');
-    };
-
-    const handleSortByCategory = () => {
-        setSortBy('category');
-    };
+    const sortedItems = items.slice().sort((a, b) => {
+        if (sortBy === 'name') {
+            return a.name.localeCompare(b.name);
+        } else if (sortBy === 'category') {
+            return a.category.localeCompare(b.category);
+        }
+        return 0;
+    });
 
     return (
-        <div>
-            <div>
-
-
+        <div className="container mx-auto mt-5">
+            <div className="flex justify-center gap-2 mb-4">
                 <button
-                    onClick={handleSortByName}
-                    className={`sort-button ${isSortByName ? 'selected' : ''} `}
+                    className={`px-4 py-2 text-sm font-medium rounded-md transition duration-500 ease-in-out transform ${sortBy === 'name' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-800'} hover:-translate-y-1 hover:scale-110`}
+                    onClick={() => setSortBy('name')}
                 >
                     Sort by Name
                 </button>
                 <button
-                    onClick={handleSortByCategory}
-                    className={`sort-button ${isSortByCategory ? 'selected' : ''} `}
+                    className={`px-4 py-2 text-sm font-medium rounded-md transition duration-500 ease-in-out transform ${sortBy === 'category' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-800'} hover:-translate-y-1 hover:scale-110`}
+                    onClick={() => setSortBy('category')}
                 >
                     Sort by Category
                 </button>
             </div>
-
-
-
-
-            <ul>
-                {sortedItems.map((item) => (
-                    <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} />
+            <div>
+                {sortedItems.map(item => (
+                    <Item key={item.id} {...item} />
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
