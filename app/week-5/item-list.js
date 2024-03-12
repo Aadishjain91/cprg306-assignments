@@ -36,13 +36,13 @@ function ItemList() {
 
                 <button
                     onClick={handleSortByName}
-                    className={`sort-button ${isSortByName ? 'selected' : ''} yellow-button`}
+                    className={`sort-button ${isSortByName ? 'selected' : ''} `}
                 >
                     Sort by Name
                 </button>
                 <button
                     onClick={handleSortByCategory}
-                    className={`sort-button ${isSortByCategory ? 'selected' : ''} yellow-button`}
+                    className={`sort-button ${isSortByCategory ? 'selected' : ''} `}
                 >
                     Sort by Category
                 </button>
