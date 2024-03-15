@@ -1,9 +1,10 @@
-"use client";
-
 import React, { useState } from 'react';
+import { useClient } from 'next/clients'; // Import useClient from Next.js
 import Item from './item';
 
 function ItemList({ items }) {
+    useClient(); // Mark ItemList as a Client Component
+
     const [sortBy, setSortBy] = useState('name');
 
     const sortedItems = items.slice().sort((a, b) => {
